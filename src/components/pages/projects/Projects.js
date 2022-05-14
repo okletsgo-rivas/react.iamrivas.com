@@ -13,14 +13,14 @@ class Projects extends Component {
       { title: "Programming", id: "programming", value: 127 },
       { title: "E-learning", id: "elearning", value: 129 },
       { title: "Design", id: "design", value: 126 },
-      { title: "Video", id: "video", value: 128 },
+      // { title: "Video", id: "video", value: 128 },
     ],
     openLB: false,
     mainSrc: null,
   };
 
   componentDidMount() {
-    fetch("//d9.iamrivas.com/json/projects")
+    fetch("//d9.iamrivas.com/json/projects2")
       .then((res) => res.json())
       .then((data) => {
         this.setState({ data });
@@ -28,15 +28,10 @@ class Projects extends Component {
       .catch(console.log);
   }
 
-  filterArray = (val) => {
-    if (val === -1) {
-      return this.state.data;
-    } else {
-      return this.state.data.filter((project) => {
-        return project.field_type.filter((tag) => tag.target_id === val).length;
-      });
-    }
-  };
+  filterArray = (val) =>
+    val === -1
+      ? [...new Set(this.state.data)]
+      : this.state.data.filter((_) => _.field_type === val.toString());
 
   filterHandler = (val) => {
     if (this.props.match.params.projectType !== val.id)
@@ -80,7 +75,7 @@ class Projects extends Component {
         </Row>
         {this.filterArray(typeID).map((project, i) => (
           <Project
-            key={project.nid[0].value}
+            key={i}
             project={project}
             i={i}
             onImageClickHandler={this.onImageClickHandler}

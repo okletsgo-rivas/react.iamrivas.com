@@ -9,17 +9,13 @@ class ProjectInfo extends Component {
       <div className=" col-md-6 text-center d-flex align-items-center info child">
         <div>
           <h5>
-            {this.props.i} {title[0].value}
+            {this.props.i} {title}
           </h5>
           <div className="text-muted">
-            <p>{body[0].value}</p>
+            <p dangerouslySetInnerHTML={{ __html: body }} />
             {!field_link.length ? null : (
               <p>
-                <a
-                  href={field_link[0].uri}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href={field_link} target="_blank" rel="noopener noreferrer">
                   <Button variant="dark">Launch</Button>
                 </a>
               </p>
@@ -34,7 +30,7 @@ class ProjectInfo extends Component {
 
 // PropTypes
 ProjectInfo.propTypes = {
-  info: PropTypes.object.isRequired
+  info: PropTypes.object.isRequired,
 };
 
 export default ProjectInfo;
