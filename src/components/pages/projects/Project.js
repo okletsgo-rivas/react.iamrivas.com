@@ -8,15 +8,7 @@ class Project extends Component {
   getThumb = () => {
     const img = this.props.project.field_image;
     return {
-      backgroundImage: img.length
-        ? "url(" +
-          img[0].url.replace(
-            /^.*[\/]/,
-            "//d8.iamrivas.com/sites/iamrivas.com/files/styles/projects/public/project/"
-          ) +
-          ".jpeg?itok=19Km1PuQ" +
-          ")"
-        : "none"
+      backgroundImage: img.length ? "url(" + img[0].url + ")" : "none",
     };
   };
   render() {
@@ -31,14 +23,14 @@ class Project extends Component {
           this,
           this.props.project.nid[0].value
         )}
-      />
+      />,
     ];
     const isEven = this.props.i % 2 === 1;
 
     return (
       <Bounce right={!isEven} left={isEven} delay={500}>
         <div className="row project">
-          {(!isEven ? arr : arr.reverse()).map(ele => ele)}
+          {(!isEven ? arr : arr.reverse()).map((ele) => ele)}
         </div>
       </Bounce>
     );
@@ -47,7 +39,7 @@ class Project extends Component {
 
 // PropTypes
 Project.propTypes = {
-  project: PropTypes.object.isRequired
+  project: PropTypes.object.isRequired,
 };
 
 export default Project;
