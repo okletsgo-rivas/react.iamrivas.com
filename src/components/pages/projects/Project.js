@@ -30,7 +30,7 @@ class Project extends Component {
     return (
       <Bounce right={!isEven} left={isEven} delay={500}>
         <div className="d-flex project">
-          {(!isEven ? arr : arr.reverse()).map((ele) => ele)}
+          {(isEven ? arr : arr.reverse()).map((ele) => ele)}
         </div>
       </Bounce>
     );
