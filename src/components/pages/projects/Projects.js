@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Project from "./Project";
-import { Container } from "react-bootstrap";
+import { Col, Container } from "react-bootstrap";
 import { Row, ToggleButtonGroup, ToggleButton, Badge } from "react-bootstrap";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
@@ -50,37 +50,51 @@ class Projects extends Component {
     let type = this.props.match.params.projectType || "all";
     let typeID = this.state.filters.filter((itm) => itm.id === type)[0].value;
 
-    return (
+    return this.state.data.length === 0 ? (
+      <Container>
+        <Row>
+          <Col>
+            <em>Loading...</em>
+          </Col>
+        </Row>
+      </Container>
+    ) : (
       <Container className="projects">
         <Row ref="filters" className="filters">
-          <ToggleButtonGroup
-            name="filters"
-            className="w-100"
-            onChange={this.filterHandler}
-            aria-label="Filter Group"
-          >
-            {this.state.filters.map((btn, i) => (
-              <ToggleButton
-                key={i}
-                value={{ value: btn.value, id: btn.id }}
-                variant={typeID === btn.value ? "primary" : "secondary"}
-              >
-                {btn.title}
-                <Badge variant="light" className="ml-2">
-                  {this.filterArray(btn.value).length}
-                </Badge>
-              </ToggleButton>
-            ))}
-          </ToggleButtonGroup>
+          <Col xs={12}>
+            <ToggleButtonGroup
+              name="filters"
+              className="w-100"
+              onChange={this.filterHandler}
+              aria-label="Filter Group"
+            >
+              {this.state.filters.map((btn, i) => (
+                <ToggleButton
+                  key={i}
+                  value={{ value: btn.value, id: btn.id }}
+                  variant={typeID === btn.value ? "primary" : "secondary"}
+                >
+                  {btn.title}
+                  <Badge variant="light" className="ml-2">
+                    {this.filterArray(btn.value).length}
+                  </Badge>
+                </ToggleButton>
+              ))}
+            </ToggleButtonGroup>
+          </Col>
         </Row>
-        {this.filterArray(typeID).map((project, i) => (
-          <Project
-            key={i}
-            project={project}
-            i={i}
-            onImageClickHandler={this.onImageClickHandler}
-          />
-        ))}
+        <Row>
+          <Col xs={12}>
+            {this.filterArray(typeID).map((project, i) => (
+              <Project
+                key={i}
+                project={project}
+                i={i}
+                onImageClickHandler={this.onImageClickHandler}
+              />
+            ))}
+          </Col>
+        </Row>
         {this.state.openLB && (
           <Lightbox
             mainSrc={this.state.mainSrc}

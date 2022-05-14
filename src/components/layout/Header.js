@@ -21,7 +21,7 @@ class Header extends Component {
         sticky="top"
         className={"px-0" + (this.state.isTop ? "" : " scrolled")}
       >
-        <Container>
+        <Container className="px-3">
           <Row className="w-100">
             <Col xs={12} className="d-flex">
               <div>
