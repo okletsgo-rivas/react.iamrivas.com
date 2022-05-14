@@ -13,39 +13,39 @@ class Projects extends Component {
       { title: "Programming", id: "programming", value: 127 },
       { title: "E-learning", id: "elearning", value: 129 },
       { title: "Design", id: "design", value: 126 },
-      { title: "Video", id: "video", value: 128 }
+      { title: "Video", id: "video", value: 128 },
     ],
     openLB: false,
-    mainSrc: null
+    mainSrc: null,
   };
 
   componentDidMount() {
-    fetch("http://d8.iamrivas.com/json/projects")
-      .then(res => res.json())
-      .then(data => {
+    fetch("//d9.iamrivas.com/json/projects")
+      .then((res) => res.json())
+      .then((data) => {
         this.setState({ data });
       })
       .catch(console.log);
   }
 
-  filterArray = val => {
+  filterArray = (val) => {
     if (val === -1) {
       return this.state.data;
     } else {
-      return this.state.data.filter(project => {
-        return project.field_type.filter(tag => tag.target_id === val).length;
+      return this.state.data.filter((project) => {
+        return project.field_type.filter((tag) => tag.target_id === val).length;
       });
     }
   };
 
-  filterHandler = val => {
+  filterHandler = (val) => {
     if (this.props.match.params.projectType !== val.id)
       this.props.history.push(`/projects/${val.id}`);
   };
 
-  onImageClickHandler = projectID => {
+  onImageClickHandler = (projectID) => {
     let projectIdx = this.state.data.findIndex(
-      itm => itm.nid[0].value === projectID
+      (itm) => itm.nid[0].value === projectID
     );
     let project = this.state.data[projectIdx];
     this.setState({ openLB: true, mainSrc: project.field_image[0].url });
@@ -53,7 +53,7 @@ class Projects extends Component {
 
   render() {
     let type = this.props.match.params.projectType || "all";
-    let typeID = this.state.filters.filter(itm => itm.id === type)[0].value;
+    let typeID = this.state.filters.filter((itm) => itm.id === type)[0].value;
 
     return (
       <Container className="projects">
