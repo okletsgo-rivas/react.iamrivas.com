@@ -20,7 +20,7 @@ class Projects extends Component {
   };
 
   componentDidMount() {
-    fetch("//d9.iamrivas.com/json/projects2")
+    fetch("//d10.iamrivas.com/json/projects2")
       .then((res) => res.json())
       .then((data) => {
         this.setState({ data });
