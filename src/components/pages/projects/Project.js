@@ -6,7 +6,7 @@ import Bounce from "react-reveal/Bounce";
 
 class Project extends Component {
   getThumb = () => {
-    const img = "//d9.iamrivas.com" + this.props.project.field_image;
+    const img = "//d10.iamrivas.com" + this.props.project.field_image;
     return {
       backgroundImage: img.length ? `url(${img})` : "none",
     };
